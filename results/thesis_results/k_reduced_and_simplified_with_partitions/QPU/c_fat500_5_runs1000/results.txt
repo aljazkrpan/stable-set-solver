@@ -1,0 +1,55 @@
+Reduced stable set graph nodes 128 and edges 3072
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 49/49 [00:04<00:00, 11.32it/s]
+Number of partitions: 50 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 49 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 48 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 47 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 46 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 45 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 44 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 43 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 42 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 41 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 40 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 39 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 38 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 37 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 36 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 35 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 34 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 33 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 32 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 31 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 30 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 29 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 28 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 27 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 26 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 25 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 24 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 23 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 22 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 21 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 20 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 19 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 18 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 17 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 16 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 15 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 14 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 13 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 12 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 11 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions:  9 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions:  8 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions:  7 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions:  6 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions:  5 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions:  4 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions:  3 || Max number of vertices: 128 || Max number of edges 3072
+Number of partitions: 10 || Max number of vertices:  96 || Max number of edges 1024
+Number of partitions:  2 || Max number of vertices:  96 || Max number of edges 1024
+Enter the number of partitions: 2
+Partition 1: solution energy: -64.0 || number of edges in solution: 0 || solution size: 64
+Partition 2: solution energy: -64.0 || number of edges in solution: 0 || solution size: 64
+Best result: best solution energy: -64.0 || number of edges in best solution: 0 || best solution size: 64

@@ -1,0 +1,17 @@
+using QPU for 8 partitions
+partition solution length:  61 edge sum 0.0 solution energy -61.0
+using QPU for 8 partitions
+partition solution length:  61 edge sum 0.0 solution energy -61.0
+using QPU for 8 partitions
+partition solution length:  57 edge sum 0.0 solution energy -57.0
+using QPU for 8 partitions
+partition solution length:  60 edge sum 0.0 solution energy -60.0
+using QPU for 8 partitions
+partition solution length:  60 edge sum 0.0 solution energy -60.0
+using QPU for 8 partitions
+partition solution length:  57 edge sum 0.0 solution energy -57.0
+using QPU for 8 partitions
+partition solution length:  63 edge sum 0.0 solution energy -63.0
+using QPU for 8 partitions
+partition solution length:  61 edge sum 0.0 solution energy -61.0
+partition best solution length:  63 edge sum 0.0

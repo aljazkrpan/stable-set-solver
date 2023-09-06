@@ -1,0 +1,48 @@
+PS D:\Faks\diploma\diplomska_naloga\koda> & C:/Users/Aljaž/AppData/Local/Microsoft/WindowsApps/python3.10.exe d:/Faks/diploma/diplomska_naloga/koda/examples.py
+Using QPU solver on C125.9
+Best result: best solution energy: -20.0 || number of edges in best solution: 0 || best solution size: 20  
+
+Using QPU solver on dsjc125.1
+Best result: best solution energy: -22.0 || number of edges in best solution: 0 || best solution size: 22  
+
+Using QPU solver on dsjc125.5
+Best result: best solution energy: 0 || number of edges in best solution: 0 || best solution size: 0       
+
+Using QPU solver on hamming6_2
+Best result: best solution energy: -26.0 || number of edges in best solution: 0 || best solution size: 26  
+
+Using QPU solver on hamming6_4
+Best result: best solution energy: -4.0 || number of edges in best solution: 0 || best solution size: 4    
+
+Using QPU solver on johnson8_2_4
+Best result: best solution energy: -4.0 || number of edges in best solution: 0 || best solution size: 4    
+
+Using QPU solver on johnson8_4_4
+Best result: best solution energy: -11.0 || number of edges in best solution: 0 || best solution size: 11  
+
+Using QPU solver on johnson16_2_4
+Best result: best solution energy: -7.0 || number of edges in best solution: 0 || best solution size: 7
+
+Using QPU solver on MANN_a9
+Best result: best solution energy: -16.0 || number of edges in best solution: 0 || best solution size: 16
+
+Using QPU solver on paley61
+Best result: best solution energy: -5.0 || number of edges in best solution: 0 || best solution size: 5    
+
+Using QPU solver on paley73
+Best result: best solution energy: -4.0 || number of edges in best solution: 0 || best solution size: 4    
+
+Using QPU solver on paley89
+Best result: best solution energy: -5.0 || number of edges in best solution: 0 || best solution size: 5    
+
+Using QPU solver on paley97
+Best result: best solution energy: -5.0 || number of edges in best solution: 0 || best solution size: 5    
+
+Using QPU solver on paley101
+Best result: best solution energy: -5.0 || number of edges in best solution: 0 || best solution size: 5
+
+Using QPU solver on spin5
+Best result: best solution energy: -35.0 || number of edges in best solution: 0 || best solution size: 35
+
+Using QPU solver on torus11
+Best result: best solution energy: -40.0 || number of edges in best solution: 0 || best solution size: 40

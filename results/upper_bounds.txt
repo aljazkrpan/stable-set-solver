@@ -1,0 +1,47 @@
+Upper bound with k-reductions and partitions for graph C125.9 with edge ratio 0.1 is 83
+
+Started calculating upper bound for graph dsjc125.1
+100%|█████████████████████████████████████████████████████████████████████████████████████████| 125/125 [13:20<00:00,  6.41s/it]
+Upper bound with k-reductions and partitions for graph dsjc125.1 with edge ratio 0.09 is 85
+Started calculating upper bound for graph dsjc125.5
+100%|█████████████████████████████████████████████████████████████████████████████████████████| 125/125 [01:07<00:00,  1.85it/s]
+Upper bound with k-reductions and partitions for graph dsjc125.5 with edge ratio 0.5 is 14
+Started calculating upper bound for graph hamming6_2
+100%|███████████████████████████████████████████████████████████████████████████████████████████| 64/64 [00:18<00:00,  3.41it/s]
+Upper bound with k-reductions and partitions for graph hamming6_2 with edge ratio 0.1 is 46
+Started calculating upper bound for graph hamming6_4
+100%|███████████████████████████████████████████████████████████████████████████████████████████| 64/64 [00:00<00:00, 93.84it/s] 
+Upper bound with k-reductions and partitions for graph hamming6_4 with edge ratio 0.65 is 4
+Started calculating upper bound for graph johnson8_2_4
+100%|██████████████████████████████████████████████████████████████████████████████████████████| 28/28 [00:00<00:00, 163.23it/s] 
+Upper bound with k-reductions and partitions for graph johnson8_2_4 with edge ratio 0.44 is 4
+Started calculating upper bound for graph johnson8_4_4
+100%|███████████████████████████████████████████████████████████████████████████████████████████| 70/70 [00:13<00:00,  5.25it/s] 
+Upper bound with k-reductions and partitions for graph johnson8_4_4 with edge ratio 0.23 is 26
+Started calculating upper bound for graph johnson16_2_4
+100%|█████████████████████████████████████████████████████████████████████████████████████████| 120/120 [01:21<00:00,  1.48it/s] 
+Upper bound with k-reductions and partitions for graph johnson16_2_4 with edge ratio 0.24 is 48
+Started calculating upper bound for graph MANN_a9
+100%|███████████████████████████████████████████████████████████████████████████████████████████| 45/45 [00:03<00:00, 11.34it/s]
+Upper bound with k-reductions and partitions for graph MANN_a9 with edge ratio 0.07 is 34
+Started calculating upper bound for graph paley61
+100%|███████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:01<00:00, 38.61it/s] 
+Upper bound with k-reductions and partitions for graph paley61 with edge ratio 0.5 is 7
+Started calculating upper bound for graph paley73
+100%|███████████████████████████████████████████████████████████████████████████████████████████| 73/73 [00:02<00:00, 26.16it/s] 
+Upper bound with k-reductions and partitions for graph paley73 with edge ratio 0.5 is 9
+Started calculating upper bound for graph paley89
+100%|███████████████████████████████████████████████████████████████████████████████████████████| 89/89 [00:05<00:00, 17.35it/s] 
+Upper bound with k-reductions and partitions for graph paley89 with edge ratio 0.5 is 11
+Started calculating upper bound for graph paley97
+100%|███████████████████████████████████████████████████████████████████████████████████████████| 97/97 [00:07<00:00, 13.53it/s] 
+Upper bound with k-reductions and partitions for graph paley97 with edge ratio 0.5 is 11
+Started calculating upper bound for graph paley101
+100%|█████████████████████████████████████████████████████████████████████████████████████████| 101/101 [00:07<00:00, 13.27it/s]
+Upper bound with k-reductions and partitions for graph paley101 with edge ratio 0.5 is 13
+Started calculating upper bound for graph spin5
+100%|█████████████████████████████████████████████████████████████████████████████████████████| 125/125 [05:18<00:00,  2.55s/it]
+Upper bound with k-reductions and partitions for graph spin5 with edge ratio 0.05 is 107
+Started calculating upper bound for graph torus11
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 121/121 [03:57<00:00,  1.96s/it] 
+Upper bound with k-reductions and partitions for graph torus11 with edge ratio 0.03 is 109

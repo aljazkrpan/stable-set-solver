@@ -1,0 +1,53 @@
+Using hybrid solver on c_fat200_2
+Best result: best solution energy: -24.0 || number of edges in best solution: 0 || best solution size: 24
+
+Using hybrid solver on c_fat500_5
+Best result: best solution energy: -64.0 || number of edges in best solution: 0 || best solution size: 64
+
+Using hybrid solver on C125.9
+Best result: best solution energy: -34.0 || number of edges in best solution: 0 || best solution size: 34
+
+Using hybrid solver on dsjc125.1
+Best result: best solution energy: -34.0 || number of edges in best solution: 0 || best solution size: 34
+
+Using hybrid solver on dsjc125.5
+Best result: best solution energy: -10.0 || number of edges in best solution: 0 || best solution size: 10
+
+Using hybrid solver on hamming6_2
+Best result: best solution energy: -32.0 || number of edges in best solution: 0 || best solution size: 32
+
+Using hybrid solver on hamming6_4
+Best result: best solution energy: -4.0 || number of edges in best solution: 0 || best solution size: 4
+
+Using hybrid solver on johnson8_2_4
+Best result: best solution energy: -4.0 || number of edges in best solution: 0 || best solution size: 4
+
+Using hybrid solver on johnson8_4_4
+Best result: best solution energy: -14.0 || number of edges in best solution: 0 || best solution size: 14
+
+Using hybrid solver on johnson16_2_4
+Best result: best solution energy: -8.0 || number of edges in best solution: 0 || best solution size: 8
+
+Using hybrid solver on MANN_a9
+Best result: best solution energy: -16.0 || number of edges in best solution: 0 || best solution size: 16
+
+Using hybrid solver on paley61
+Best result: best solution energy: -5.0 || number of edges in best solution: 0 || best solution size: 5
+
+Using hybrid solver on paley73
+Best result: best solution energy: -5.0 || number of edges in best solution: 0 || best solution size: 5
+
+Using hybrid solver on paley89
+Best result: best solution energy: -5.0 || number of edges in best solution: 0 || best solution size: 5
+
+Using hybrid solver on paley97
+Best result: best solution energy: -6.0 || number of edges in best solution: 0 || best solution size: 6
+
+Using hybrid solver on paley101
+Best result: best solution energy: -5.0 || number of edges in best solution: 0 || best solution size: 5    
+
+Using hybrid solver on spin5
+Best result: best solution energy: -50.0 || number of edges in best solution: 0 || best solution size: 50  
+
+Using hybrid solver on torus11
+Best result: best solution energy: -55.0 || number of edges in best solution: 0 || best solution size: 55  

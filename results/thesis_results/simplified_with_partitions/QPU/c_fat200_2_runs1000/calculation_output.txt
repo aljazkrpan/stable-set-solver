@@ -1,0 +1,21 @@
+Number of nodes: 200
+Number of edges: 16665
+using QPU for 9 partitions
+partition solution length:  22 edge sum 0.0 solution energy -22.0
+using QPU for 9 partitions
+partition solution length:  22 edge sum 0.0 solution energy -22.0
+using QPU for 9 partitions
+partition solution length:  22 edge sum 0.0 solution energy -22.0
+using QPU for 9 partitions
+partition solution length:  22 edge sum 0.0 solution energy -22.0
+using QPU for 9 partitions
+partition solution length:  21 edge sum 0.0 solution energy -21.0
+using QPU for 9 partitions
+partition solution length:  22 edge sum 0.0 solution energy -22.0
+using QPU for 9 partitions
+partition solution length:  22 edge sum 0.0 solution energy -22.0
+using QPU for 9 partitions
+partition solution length:  24 edge sum 0.0 solution energy -24.0
+using QPU for 9 partitions
+partition solution length:  24 edge sum 0.0 solution energy -24.0
+partition best solution length:  24 edge sum 0.0
