@@ -145,21 +145,19 @@ def example4():
     #sampler = AutoEmbeddingComposite(DWaveSampler(token="provide_you_token_here"))
     sampler = AutoEmbeddingComposite(DWaveSampler(token="DEV-33b6ae807bdea6181a9c83c105cfc10c87b5ce73"))
     beta=200
-    """
+
     # for fat200_2, we'll use partition size 9 we got from example3()
     edge_list_file_path = 'Stable_set_data-main/Instances/c_fat_graphs/c_fat200_2_stable_set_edge_list.txt'
     num_nodes, edges = read_edge_list(edge_list_file_path)
     stable_set_graph = create_networkx_graph(num_nodes, edges)
-    #output = "results/example_results/simplified_with_partitions/QPU/c_fat200_2_runs1000/c_fat200_2.pkl"
-    output = "results/example_results/simplified_with_partitions/QPU_200/c_fat200_2_runs1000/c_fat200_2"
+    output = "results/example_results/simplified_with_partitions/QPU/c_fat200_2_runs1000/c_fat200_2.pkl"
     solution = calculate_best_solution(stable_set_graph, sampler, beta=beta, output_file=output, num_of_part=9, num_of_runs=1000)
-    """
+
     # for fat500_5, we'll use partition size 8 we got from example3()
     edge_list_file_path = 'Stable_set_data-main/Instances/c_fat_graphs/c_fat500_5_stable_set_edge_list.txt'
     num_nodes, edges = read_edge_list(edge_list_file_path)
     stable_set_graph = create_networkx_graph(num_nodes, edges)
-    #output = "results/example_results/simplified_with_partitions/QPU/c_fat500_5_runs1000/c_fat500_5.pkl"
-    output = "results/example_results/simplified_with_partitions/QPU_200/c_fat500_5_runs1000_try2/c_fat500_5"
+    output = "results/example_results/simplified_with_partitions/QPU/c_fat500_5_runs1000/c_fat500_5.pkl"
     solution = calculate_best_solution(stable_set_graph, sampler, beta=beta, output_file=output, num_of_part=8, num_of_runs=1000)
 
 # We use k_reduction to reduce graph with k=64, and then use suitable partition to on the reduced graph
@@ -178,6 +176,7 @@ def example5():
     output = "results/example_results/k_reduced_and_simplified_with_partitions/QPU/c_fat500_5_runs1000/c_fat500_5"
     solution = calculate_best_solution(reduced_stable_set_graph, sampler, output_file=output, num_of_part=num_of_part, num_of_runs=1000)
 
+# We use k_core_upper_bound to find upper bound for stable set problem using the method described in the thesis
 def example6():
     for edge_list_file_path in all_dense_graph_files + all_graph_files:
         num_nodes, edges = read_edge_list(edge_list_file_path)
@@ -186,6 +185,7 @@ def example6():
         edge_ratio =  round(len(stable_set_graph.edges)/(len(stable_set_graph.nodes)*(len(stable_set_graph.nodes)-1)*0.5), 2)
         print(f"Upper bound for graph {Path(edge_list_file_path).name.replace('_stable_set_edge_list.txt','')} with edge ratio {edge_ratio} is {find_k_core_upper_bound(stable_set_graph)}")
 
+# We use k_core_upper_bound together with CH-partitions to find upper bound for stable set problem using the method described in the thesis
 def example7():
     for edge_list_file_path in all_graph_files[1:]:
         print(f"Started calculating upper bound for graph {Path(edge_list_file_path).name.replace('_stable_set_edge_list.txt','')}")
@@ -201,42 +201,21 @@ def example7():
         edge_ratio =  round(len(stable_set_graph.edges)/(len(stable_set_graph.nodes)*(len(stable_set_graph.nodes)-1)*0.5), 2)
         print(f"Upper bound with k-reductions and partitions for graph {Path(edge_list_file_path).name.replace('_stable_set_edge_list.txt','')} with edge ratio {edge_ratio} is {max(upper_bounds_of_subgraphs)}")
 
-def example8():
-
-        
-    for edge_list_file_path in all_graph_files[8:9]:#[-2:]:#[7:8]: #6:8
-        #print(f"Started calculating upper bound for graph {Path(edge_list_file_path).name.replace('_stable_set_edge_list.txt','')}")
+# Using generalized version of k_d_reduce we find upper bound for d=2, just like described in the thesis
+def example8():        
+    for edge_list_file_path in all_graph_files[8:9]:
         num_nodes, edges = read_edge_list(edge_list_file_path)
         stable_set_graph = create_networkx_graph(num_nodes, edges)
         clique_graph = nx.complement(stable_set_graph)
         partition_with_halo_list = list(map(lambda x : list(set(clique_graph.neighbors(x)).union({x})), clique_graph.nodes))
-        #upper_bounds_of_subgraphs = map(lambda x : find_k_core_upper_bound(stable_set_graph.subgraph(x)), partition_with_halo_list)
         upper_bounds_of_subgraphs = []
-        depth = 5
+        depth = 2
         print(f"Upper bound with k,{depth}-reductions and partitions for graph {Path(edge_list_file_path).name.replace('_stable_set_edge_list.txt','')}")
         for partition in tqdm(partition_with_halo_list):
-            upper_bounds_of_subgraphs.append(k_d_reduce_upper_bound(stable_set_graph.subgraph(partition),
-                                        d=depth))
+            upper_bounds_of_subgraphs.append(k_d_reduce_upper_bound(stable_set_graph.subgraph(partition), d=depth))
         
         edge_ratio =  round(len(stable_set_graph.edges)/(len(stable_set_graph.nodes)*(len(stable_set_graph.nodes)-1)*0.5), 2)
         print(f"Upper bound with k,{depth}-reductions and partitions for graph {Path(edge_list_file_path).name.replace('_stable_set_edge_list.txt','')} with edge ratio {edge_ratio} is {max(upper_bounds_of_subgraphs)}")
-        #print(f"graph nodes and edges {len(clique_graph.nodes)}/{len(clique_graph.edges)}")
 
 if __name__ == "__main__":
-    example4()
-    #stable_set_graph = create_networkx_graph(num_nodes=5, edges=[(0,1), (1,2), (1,3), (1,4), (2,3)])
-    #sampler = SimulatedAnnealingSampler()
-    #solution = calculate_best_solution(stable_set_graph, sampler, no_output_file=True)
-    ## [0] means partition 1 (since we did not specify, default num_of_part=1)
-    #print(solution[0]["sample_set"])
-    exit()
-    for edge_list_file_path in all_dense_graph_files:
-        num_nodes, edges = read_edge_list(edge_list_file_path)
-        stable_set_graph = create_networkx_graph(num_nodes, edges)
-
-        # Here we calculate results on the hybrid solver which get saved in the file
-        print(f"Using hybrid solver on {Path(edge_list_file_path).name.replace('_stable_set_edge_list.txt','')}")
-        # or if you don't have an account you can replace it with: sampler = SimulatedAnnealingSampler()
-        sampler = LeapHybridSampler(token="DEV-33b6ae807bdea6181a9c83c105cfc10c87b5ce73")
-        output = fr"results/example_results/hybrid_n/{Path(edge_list_file_path).name.replace('_stable_set_edge_list.txt','')}.pkl"
-        solutions = calculate_best_solution(stable_set_graph, sampler, output_file=output)
+    example1()
