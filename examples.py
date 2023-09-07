@@ -208,7 +208,7 @@ def example8():
         partition_with_halo_list = list(map(lambda x : list(set(clique_graph.neighbors(x)).union({x})), clique_graph.nodes))
         upper_bounds_of_subgraphs = []
         depth = 2
-        print(f"Upper bound with k,{depth}-reductions and partitions for graph {Path(edge_list_file_path).name.replace('_stable_set_edge_list.txt','')}")
+        print(f"Calculating upper bound with k,{depth}-reductions and partitions for graph {Path(edge_list_file_path).name.replace('_stable_set_edge_list.txt','')}")
         for partition in tqdm(partition_with_halo_list):
             upper_bounds_of_subgraphs.append(k_d_reduce_upper_bound(stable_set_graph.subgraph(partition), d=depth))
         
