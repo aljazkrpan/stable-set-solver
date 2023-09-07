@@ -8,6 +8,9 @@
   - [calculate_best_solution](#calculate_best_solution)
   - [open_saved_sample_set](#open_saved_sample_set)
   - [eliminate_and_recalculate](#eliminate_and_recalculate)
+  - [k_d_edge_core](#k_d_edge_core)
+  - [k_d_reduce_graph](#k_d_reduce_graph)
+  - [k_d_reduce_upper_bound](#k_d_reduce_upper_bound)
 - [Examples](#examples)
 
 # Introduction
