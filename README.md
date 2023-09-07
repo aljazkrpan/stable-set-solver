@@ -14,7 +14,7 @@
 - [Examples](#examples)
 
 # Introduction
-This library was written as the supplementary material for the bachelor thesis: "Reševanje problema največje neodvisne množice s kvantnimi žarilniki" or, in english "Solving the Maximum Independent Set Problem with Quantum Annealers". As the name suggests, it focuses on solving the maximum independent set on (D-Wave's) quantum annealers. This library provides the code that was used to calcualte the result, the code is reusable and can be used for an arbitrary (simple, undirected) graph.
+This library was written as the supplementary material for the bachelor thesis: "Reševanje problema največje neodvisne množice s kvantnimi žarilniki" or, in english "Solving the Maximum Independent Set Problem with Quantum Annealers". As the name suggests, it focuses on solving the maximum independent set on (D-Wave's) quantum annealers. This library provides the code that was used to calcualte the result, the code is reusable and can be used on an arbitrary (simple, undirected) graph.
 
 # Installing requirements
 You can install requirements with the following code:
@@ -206,5 +206,4 @@ Examples are located in the `examples.py` file:
 - `example5` shows the use of `k_reduction` to reduce graph with k=64, and after that  we use suitable partition together with `calculate_best_solution` to calculate better solution
 - `example6` shows the use of `k_core_upper_bound` to find upper bound for stable set problem using the method described in the thesis
 - `example7` shows the use of `k_core_upper_bound` together with CH-partitions to find upper bound for stable set problem using the method described in the thesis
-
 - `example8` shows the use of `k_d_core_upper_bound` together with CH-partitions to find upper bound for stable set problem using the method described in the thesis
