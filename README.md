@@ -14,7 +14,7 @@
 - [Examples](#examples)
 
 # Introduction
-This library was written as the supplementary material for the bachelor thesis: "Reševanje NP-težkih optimizacijskih problemov z uporabo kvantnih žarilnikov" or, in english "Solving NP-hard optimization problems using quantum annealers". As the name suggests, it focuses on solving optimization problems on (D-Wave's) quantum annealers, in our case, the main focus is on developing theory for and solving the maximum stable set problem (also known as the maximum independet set). But the general problem solving techniques and ideas used can also be translated to any other problem. This library provides the code that was used to calcualte the result, the code reusable and can be used for an arbitrary (simple, undirected) graph.
+This library was written as the supplementary material for the bachelor thesis: "Reševanje problema največje neodvisne množice s kvantnimi žarilniki" or, in english "Solving the Maximum Independent Set Problem with Quantum Annealers". As the name suggests, it focuses on solving the maximum independent set on (D-Wave's) quantum annealers. This library provides the code that was used to calcualte the result, the code is reusable and can be used for an arbitrary (simple, undirected) graph.
 
 # Installing requirements
 You can install requirements with the following code:
