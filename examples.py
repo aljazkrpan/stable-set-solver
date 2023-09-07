@@ -9,7 +9,7 @@ from stable_set_solver import print_best_partitions
 from stable_set_solver import k_edge_core
 from stable_set_solver import k_reduce_graph
 from stable_set_solver import first_k_for_reduction
-from stable_set_solver import find_k_core_upper_bound
+from stable_set_solver import k_reduce_upper_bound
 from stable_set_solver import k_d_reduce_upper_bound
 from stable_set_solver import k_d_reduce_graph
 
@@ -142,23 +142,21 @@ def example3():
 def example4():
     # or if you don't have an account you can replace it with:
     # sampler = SimulatedAnnealingSampler()
-    #sampler = AutoEmbeddingComposite(DWaveSampler(token="provide_you_token_here"))
-    sampler = AutoEmbeddingComposite(DWaveSampler(token="DEV-33b6ae807bdea6181a9c83c105cfc10c87b5ce73"))
-    beta=200
+    sampler = AutoEmbeddingComposite(DWaveSampler(token="provide_you_token_here"))
 
     # for fat200_2, we'll use partition size 9 we got from example3()
     edge_list_file_path = 'Stable_set_data-main/Instances/c_fat_graphs/c_fat200_2_stable_set_edge_list.txt'
     num_nodes, edges = read_edge_list(edge_list_file_path)
     stable_set_graph = create_networkx_graph(num_nodes, edges)
     output = "results/example_results/simplified_with_partitions/QPU/c_fat200_2_runs1000/c_fat200_2.pkl"
-    solution = calculate_best_solution(stable_set_graph, sampler, beta=beta, output_file=output, num_of_part=9, num_of_runs=1000)
+    solution = calculate_best_solution(stable_set_graph, sampler, output_file=output, num_of_part=9, num_of_runs=1000)
 
     # for fat500_5, we'll use partition size 8 we got from example3()
     edge_list_file_path = 'Stable_set_data-main/Instances/c_fat_graphs/c_fat500_5_stable_set_edge_list.txt'
     num_nodes, edges = read_edge_list(edge_list_file_path)
     stable_set_graph = create_networkx_graph(num_nodes, edges)
     output = "results/example_results/simplified_with_partitions/QPU/c_fat500_5_runs1000/c_fat500_5.pkl"
-    solution = calculate_best_solution(stable_set_graph, sampler, beta=beta, output_file=output, num_of_part=8, num_of_runs=1000)
+    solution = calculate_best_solution(stable_set_graph, sampler, output_file=output, num_of_part=8, num_of_runs=1000)
 
 # We use k_reduction to reduce graph with k=64, and then use suitable partition to on the reduced graph
 def example5():
@@ -183,7 +181,7 @@ def example6():
         stable_set_graph = create_networkx_graph(num_nodes, edges)
         
         edge_ratio =  round(len(stable_set_graph.edges)/(len(stable_set_graph.nodes)*(len(stable_set_graph.nodes)-1)*0.5), 2)
-        print(f"Upper bound for graph {Path(edge_list_file_path).name.replace('_stable_set_edge_list.txt','')} with edge ratio {edge_ratio} is {find_k_core_upper_bound(stable_set_graph)}")
+        print(f"Upper bound for graph {Path(edge_list_file_path).name.replace('_stable_set_edge_list.txt','')} with edge ratio {edge_ratio} is {k_reduce_upper_bound(stable_set_graph)}")
 
 # We use k_core_upper_bound together with CH-partitions to find upper bound for stable set problem using the method described in the thesis
 def example7():
@@ -196,7 +194,7 @@ def example7():
         #upper_bounds_of_subgraphs = map(lambda x : find_k_core_upper_bound(stable_set_graph.subgraph(x)), partition_with_halo_list)
         upper_bounds_of_subgraphs = []
         for partition in tqdm(partition_with_halo_list):
-            upper_bounds_of_subgraphs.append(find_k_core_upper_bound(stable_set_graph.subgraph(partition)))
+            upper_bounds_of_subgraphs.append(k_reduce_upper_bound(stable_set_graph.subgraph(partition)))
         
         edge_ratio =  round(len(stable_set_graph.edges)/(len(stable_set_graph.nodes)*(len(stable_set_graph.nodes)-1)*0.5), 2)
         print(f"Upper bound with k-reductions and partitions for graph {Path(edge_list_file_path).name.replace('_stable_set_edge_list.txt','')} with edge ratio {edge_ratio} is {max(upper_bounds_of_subgraphs)}")

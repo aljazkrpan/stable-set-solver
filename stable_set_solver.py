@@ -209,6 +209,9 @@ def k_edge_core(clique_graph, k):
     # This is to make sure that the loop condition is always true the first time
     edges_before = len(clique_graph.edges)+1
     edges_after = len(clique_graph.edges)
+
+    # Until number of edges decreases, go through each edge and check if the condition is satisfied for the
+    # edge, if it is not, remove the edge
     while(edges_before > edges_after):
         edges_before = edges_after
         for edge in clique_graph.edges:
@@ -220,6 +223,8 @@ def k_edge_core(clique_graph, k):
 def k_reduce_graph(clique_graph, k):
     nodes_before = len(clique_graph.nodes)+1
     nodes_after = len(clique_graph.nodes)
+    # Alternate between k-core and k-edge-core methods, continue until the output graph stops
+    # getting smaller
     while(nodes_before > nodes_after or edges_before > edges_after):
         nodes_before = nodes_after
         k_core_clique_graph = nx.k_core(clique_graph, k-1)
@@ -232,20 +237,15 @@ def k_reduce_graph(clique_graph, k):
         clique_graph = k_core_clique_graph
     return clique_graph
 
-def first_k_for_reduction(stable_set_graph):
-    clique_graph = nx.complement(stable_set_graph)
-    min_common_neighbors = len(stable_set_graph.nodes)
-    min_degree = min(dict(clique_graph.degree()).values())
-    for edge in clique_graph.edges:
-        min_common_neighbors = min(len(list(nx.common_neighbors(clique_graph, *edge))), min_common_neighbors)
-    return min(min_degree, min_common_neighbors)
 
-def find_k_core_upper_bound(stable_set_graph):
+def k_reduce_upper_bound(stable_set_graph):
     clique_graph = nx.complement(stable_set_graph)
+    # find min km, this is where at least one edge gets removed
     k_min = min(
                 min(dict(clique_graph.degree()).values()),
                 min(list(map(lambda x : len(list(nx.common_neighbors(clique_graph, *x))), clique_graph.edges)))
             )
+    # find max k, this is where you get an empty graph for sure
     k_max = max(
                 max(dict(clique_graph.degree()).values()),
                 max(list(map(lambda x : len(list(nx.common_neighbors(clique_graph, *x))), clique_graph.edges)))
@@ -260,15 +260,81 @@ def find_k_core_upper_bound(stable_set_graph):
     return k_min
 
 #=================================================================================
+def k_d_edge_core(
+        clique_graph,
+        k,
+        d, 
+        node_tuple = (),
+        previous_common_neighbors = [], 
+        false_sets = set()
+    ):
+    # When depth is 0, until number of edges decreases, go through each 
+    # edge and check if the condition is satisfied for the
+    # edge, if it is not, remove the edge
+    if(len(node_tuple) == 0):
+        edges_before = len(clique_graph.edges)+1
+        edges_after = len(clique_graph.edges)
+        while(edges_before > edges_after):
+            edges_before = edges_after
+            for edge in clique_graph.edges:
+                common_neighbors = set(nx.common_neighbors(clique_graph, *edge))
+                if(len(common_neighbors) < k):
+                    clique_graph.remove_edge(*edge)
+                else:
+                    condition = k_d_edge_core(clique_graph, k-1, d=d, node_tuple=tuple(sorted((*edge,))), previous_common_neighbors=common_neighbors, false_sets=false_sets)
+                    if(not condition):
+                        clique_graph.remove_edge(*edge)
+            edges_after = len(clique_graph.edges)
+        return clique_graph
+    
+    # When 0 < depth <= d, check condition for all neighbors, as described in the thesis
+    elif(len(node_tuple)-1 <= d):
+        for node in previous_common_neighbors:
+            common_neighbors = previous_common_neighbors.intersection(set(clique_graph.neighbors(node)))
+            if(len(common_neighbors) >= k):
+                new_nodes_tuple = tuple(sorted(node_tuple+(node,)))
+                if(new_nodes_tuple not in false_sets):
+                    condition = k_d_edge_core(clique_graph, k-1, d=d, node_tuple=new_nodes_tuple, previous_common_neighbors=common_neighbors, false_sets=false_sets)
+                    if(condition):
+                        return True
+                    else:
+                        false_sets.add(new_nodes_tuple)
+        return False
+    return True
+
+
+def k_d_reduce_graph(clique_graph, k, d):
+    nodes_before = len(clique_graph.nodes)+1
+    nodes_after = len(clique_graph.nodes)
+    false_sets = set()
+    # Alternate between k-core and (k,d)-edge-core methods, continue until the output graph stops
+    # getting smaller
+    while(nodes_before > nodes_after or edges_before > edges_after):
+        nodes_before = nodes_after
+        k_core_clique_graph = nx.k_core(clique_graph, k-1)
+        nodes_after = len(k_core_clique_graph.nodes)
+
+        edges_before = len(k_core_clique_graph.edges)
+        k_edge_core_clique_graph, false_sets = k_d_edge_core(k_core_clique_graph, k=k-2, d=d, false_sets=false_sets)
+        edges_after = len(k_edge_core_clique_graph.edges)
+
+        clique_graph = k_core_clique_graph
+    return clique_graph
+
+
 def k_d_reduce_upper_bound(stable_set_graph, d, k_min=1):
     clique_graph = nx.complement(stable_set_graph)
     # Handeling special case when graph doesn't have edges, otherwise we get an error
     if(len(clique_graph.edges) == 0):
         return len(clique_graph.nodes)
+    
+    # find max k, where you get an empty graph
     k_max = max(
                 max(dict(clique_graph.degree()).values()),
                 max(list(map(lambda x : len(list(nx.common_neighbors(clique_graph, *x))), clique_graph.edges)))
             ) + 1
+    
+    # binary search
     while k_min < k_max-1:
         k_mid =(k_min+k_max) // 2
         reduced_graph = k_d_reduce_graph(clique_graph, k_mid, d=min(d, k_mid))
@@ -277,83 +343,3 @@ def k_d_reduce_upper_bound(stable_set_graph, d, k_min=1):
         else: 
             k_min = k_mid
     return k_min
-
-def k_d_reduce_graph(clique_graph, k, d):
-    nodes_before = len(clique_graph.nodes)+1
-    nodes_after = len(clique_graph.nodes)
-    false_sets = set()
-    while(nodes_before > nodes_after or edges_before > edges_after):
-        nodes_before = nodes_after
-        k_core_clique_graph = nx.k_core(clique_graph, k-1)
-        nodes_after = len(k_core_clique_graph.nodes)
-
-        edges_before = len(k_core_clique_graph.edges)
-        k_edge_core_clique_graph, false_sets = k_d_edge_core(k_core_clique_graph, k=k-2, d=d, false_sets=false_sets)
-        #k_edge_core_clique_graph = k_d_edge_core(k_core_clique_graph, k=k-2, d=d)
-        edges_after = len(k_edge_core_clique_graph.edges)
-
-        clique_graph = k_core_clique_graph
-    return clique_graph
-
-def k_d_edge_core(clique_graph, k, d, node_tuple = (), previous_common_neighbors = [], false_sets = set()):
-    if(len(node_tuple) == 0):
-        edges_before = len(clique_graph.edges)+1
-        edges_after = len(clique_graph.edges)
-        while(edges_before > edges_after):
-            edges_before = edges_after
-            for edge in tqdm(clique_graph.edges, disable=True):
-                common_neighbors = set(nx.common_neighbors(clique_graph, *edge))
-                if(len(common_neighbors) < k):
-                    clique_graph.remove_edge(*edge)
-                else:
-                    condition = k_d_edge_core(clique_graph, k-1, d=d, node_tuple=tuple(sorted((*edge,))), previous_common_neighbors=common_neighbors, false_sets=false_sets)
-                    if(not condition):
-                        clique_graph.remove_edge(*edge)
-            edges_after = len(clique_graph.edges)
-        return clique_graph, false_sets
-    
-    elif(len(node_tuple)-1 <= d):
-        for node in previous_common_neighbors:
-            common_neighbors = previous_common_neighbors.intersection(set(clique_graph.neighbors(node)))
-            if(len(common_neighbors) >= k):
-                new_nodes_tuple = tuple(sorted(node_tuple+(node,)))
-                if(new_nodes_tuple not in false_sets):
-                    condition = k_d_edge_core(clique_graph, k-1, d=d, node_tuple=new_nodes_tuple, previous_common_neighbors=common_neighbors, false_sets=false_sets)
-                    if(condition):
-                        return True
-                    else:
-                        false_sets.add(new_nodes_tuple)
-        return False
-    return True
-
-def __k_d_edge_core(clique_graph, k, d, node_tuple = (), previous_common_neighbors = [], false_sets = set()):
-    if(len(node_tuple) == 0):
-        edges_before = len(clique_graph.edges)+1
-        edges_after = len(clique_graph.edges)
-        while(edges_before > edges_after):
-            edges_before = edges_after
-            for edge in tqdm(clique_graph.edges, disable=True):
-                common_neighbors = set(nx.common_neighbors(clique_graph, *edge))
-                if(len(common_neighbors) < k):
-                    clique_graph.remove_edge(*edge)
-                else:
-                    condition = k_d_edge_core(clique_graph, k-1, d=d, node_tuple=tuple(sorted((*edge,))), previous_common_neighbors=common_neighbors, false_sets=false_sets)
-                    if(not condition):
-                        clique_graph.remove_edge(*edge)
-            edges_after = len(clique_graph.edges)
-        #return clique_graph, false_sets
-        return clique_graph
-    
-    elif(len(node_tuple)-1 <= d):
-        for node in previous_common_neighbors:
-            common_neighbors = previous_common_neighbors.intersection(set(clique_graph.neighbors(node)))
-            if(len(common_neighbors) >= k):
-                new_nodes_tuple = tuple(sorted(node_tuple+(node,)))
-                if(new_nodes_tuple not in false_sets):
-                    condition = k_d_edge_core(clique_graph, k-1, d=d, node_tuple=new_nodes_tuple, previous_common_neighbors=common_neighbors, false_sets=false_sets)
-                    if(condition):
-                        return True
-                    else:
-                        false_sets.add(new_nodes_tuple)
-        return False
-    return True

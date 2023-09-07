@@ -39,7 +39,7 @@ Argument | Explanation
 `stable_set_graph`| `networkx` graph, on which `solution_nodes` were calculated
 `solution_nodes`| list of nodes, that are in solution
 
-Returns: `corrected_solution`, which is a list of nodes, that are a subset of `solution_nodes` and are stable set in graph `stable_set_graph`. Properties of this algorithm are described in proposition 4.1, and how its solution relates to energy in `stable_set_graph` is described in proposition 4.2.
+Returns: `corrected_solution`, which is a list of nodes, that are a subset of `solution_nodes` and are stable set in graph `stable_set_graph`. Properties of this algorithm are described in proposition 5.1, and how its solution relates to energy in `stable_set_graph` is described in proposition 5.2.
 
 ## calculate_partition_with_halo
 ```
@@ -113,8 +113,8 @@ Argument | Explanation
 
 Returns: `SampleSet` object.
 
-## eliminate_and_recalculate
 
+## eliminate_and_recalculate
 ```
 def eliminate_and_recalculate(
         stable_set_graph,
@@ -137,9 +137,71 @@ Key | Explanation
 `"best_recalculated_solution"`| dictionary `recalculated_solutions` = {`"recalculated_solution_nodes"`: `list_of_nodes`, `"recalculated_solution_energy"`: `solution_energy`}
 `"all_recalculated_solutions"`| list of dictionaries `recalculated_solutions`, define like in above key
 
+## k_d_edge_core
+```
+def k_d_edge_core(
+        clique_graph,
+        k,
+        d, 
+        node_tuple = (),
+        previous_common_neighbors = [], 
+        false_sets = set()
+    ):
+```
+
+Argument | Explanation
+---|---
+`clique_graph`| `networkx` graph, on which we want to calculate k-edge-core for clique calculation.
+`k`| A number of k from the definition
+`d`| A number of d from the definition
+`node_tuple`| Argument used in recursion, leave it empty
+`previous_common_neighbors`| Argument used in recursion, leave it empty
+`false_sets` | Argument used in recursion, leave it empty
+
+Returns a `networkx` graph, which is (k,d)-edge-core of the original graph.
+
+## k_d_reduce_graph
+```
+def k_d_edge_core(
+        clique_graph,
+        k,
+        d, 
+    ):
+```
+
+Argument | Explanation
+---|---
+`clique_graph`| `networkx` graph, on which we want to calculate k-edge-core for clique calculation.
+`k`| A number of k from the definition
+`d`| A number of d from the definition
+
+Returns a `networkx` graph, which is subgraph of the original graph. It was (k,d)-reduced by the technique described in the thesis
+
+## k_d_reduce_upper_bound
+```
+def k_d_reduce_upper_bound(
+        stable_set_graph,
+        d,
+        k_min=1
+    ):
+```
+
+Argument | Explanation
+---|---
+`stable_set_graph`| `networkx` graph, on which we want to calculate upper bound for stable set problem.
+`d`| A number of d from the definition
+`k_min`| A minimal number on where to start binary search. You can insert current lower bound for the graph or just leave it at `1` .
+
+Returns a integer, which is the found upper bound for stable set problem
+
 # Examples
 Examples are located in the `examples.py` file:
  - `example1` shows the use of `calculate_best_solution` function without partitionig (`num_of_part=1`) for hybrid and QPU sampler.
  - `example2` shows the use of `eliminate_and_recalculate` function for the results we got from QPU sampler in `example1`.
  - `example3` shows the use of `print_best_partitions` function on 2 dense graphs.
  - `example4` shows the use of `calculate_best_solution` function with partitioning, we use suitable partition sizes we got from `example3`
+- `example5` shows the use of `k_reduction` to reduce graph with k=64, and after that  we use suitable partition together with `calculate_best_solution` to calculate better solution
+- `example6` shows the use of `k_core_upper_bound` to find upper bound for stable set problem using the method described in the thesis
+- `example7` shows the use of `k_core_upper_bound` together with CH-partitions to find upper bound for stable set problem using the method described in the thesis
+
+- `example8` shows the use of `k_d_core_upper_bound` together with CH-partitions to find upper bound for stable set problem using the method described in the thesis
